@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt"
 	"jwt-request-demo/util"
 	"log"
 	"net/http"
