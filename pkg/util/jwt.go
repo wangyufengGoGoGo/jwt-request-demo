@@ -2,7 +2,7 @@ package util
 
 import (
 	"fmt"
-	"github.com/golang-jwt/jwt"
+	"github.com/dgrijalva/jwt-go"
 	"os"
 	"time"
 )
@@ -11,6 +11,7 @@ import (
  * @Author wyf
  * @Date 2021/7/8 11:17
  **/
+
 const Secret = "JWT_SECRET"
 
 func ValidateToken(token string) (*jwt.Token, error) {

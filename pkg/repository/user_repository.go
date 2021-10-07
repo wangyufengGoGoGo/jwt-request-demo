@@ -2,7 +2,7 @@ package repository
 
 import (
 	"gorm.io/gorm"
-	"jwt-request-demo/model"
+	model2 "jwt-request-demo/pkg/model"
 	"log"
 )
 
@@ -15,9 +15,8 @@ type userRepository struct {
 	*gorm.DB
 }
 
-
 type UserRepository interface {
-	AddUser(user *model.SysUser) (*model.SysUser, error)
+	AddUser(user *model2.SysUser) (*model2.SysUser, error)
 	Migrate() error
 }
 
@@ -27,11 +26,11 @@ func NewRepository(db *gorm.DB) UserRepository {
 	}
 }
 
-func (u userRepository) AddUser(user *model.SysUser) (*model.SysUser, error) {
+func (u userRepository) AddUser(user *model2.SysUser) (*model2.SysUser, error) {
 	return user, u.Create(user).Error
 }
 
 func (u userRepository) Migrate() error {
 	log.Print("[UserRepository]...Migrate")
-	return u.AutoMigrate(&model.SysUser{})
+	return u.AutoMigrate(&model2.SysUser{})
 }

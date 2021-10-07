@@ -11,7 +11,7 @@ import (
 
 type SysUser struct {
 	gorm.Model
-	Username string	`json:"username"`
+	Username string `json:"username"`
 	Password string `json:"password"`
 	Email    string `json:"email"`
 }
@@ -19,4 +19,3 @@ type SysUser struct {
 func (SysUser) TableName() string {
 	return "sys_users"
 }
-

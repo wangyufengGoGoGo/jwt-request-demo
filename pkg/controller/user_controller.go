@@ -3,8 +3,8 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"jwt-request-demo/model"
-	"jwt-request-demo/repository"
+	model2 "jwt-request-demo/pkg/model"
+	repository2 "jwt-request-demo/pkg/repository"
 	"net/http"
 )
 
@@ -18,7 +18,7 @@ type UserController interface {
 }
 
 type userController struct {
-	repository.UserRepository
+	repository2.UserRepository
 }
 
 func (u userController) AddUser(ctx *gin.Context) {
@@ -27,18 +27,18 @@ func (u userController) AddUser(ctx *gin.Context) {
 			ctx.JSON(http.StatusBadRequest, gin.H{"msg": p.(error).Error()})
 		}
 	}()
-	sysUser := &model.SysUser{}
+	sysUser := &model2.SysUser{}
 
 	if err := ctx.ShouldBindJSON(sysUser); err != nil {
-		panic(fmt.Errorf( "cannot parse struct"))
+		panic(fmt.Errorf("cannot parse struct"))
 	}
 	user, err := u.UserRepository.AddUser(sysUser)
 	if err != nil {
 		panic(err)
 	}
-	ctx.JSON(http.StatusOK, gin.H{"data":user})
+	ctx.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-func NewUserController(userRepository repository.UserRepository) UserController {
+func NewUserController(userRepository repository2.UserRepository) UserController {
 	return userController{userRepository}
 }
