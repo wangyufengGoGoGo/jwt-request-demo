@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	util2 "jwt-request-demo/pkg/util"
+	"github.com/golang-jwt/jwt/v4"
+	"jwt-request-demo/pkg/util"
 	"log"
 	"net/http"
 )
@@ -28,7 +28,7 @@ func AuthorizeJWT() gin.HandlerFunc {
 
 		tokenString := authHeader[len(BearerSchema):]
 
-		if token, err := util2.ValidateToken(tokenString); err != nil {
+		if token, err := util.ValidateToken(tokenString); err != nil {
 			log.Println("token", token)
 			ctx.AbortWithStatusJSON(http.StatusUnauthorized, map[string]interface{}{
 				"code": http.StatusUnauthorized,

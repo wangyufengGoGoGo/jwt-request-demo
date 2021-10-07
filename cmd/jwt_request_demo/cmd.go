@@ -2,15 +2,15 @@ package main
 
 import (
 	"jwt-request-demo/api"
-	route2 "jwt-request-demo/init/route"
-	db2 "jwt-request-demo/pkg/db"
+	"jwt-request-demo/init/route"
+	"jwt-request-demo/pkg/db"
 	"jwt-request-demo/pkg/middleware"
 )
 
 func main() {
-	mysqlConn, _ := db2.InitMysql()
+	mysqlConn, _ := db.InitMysql()
 
-	httpRouter := route2.InitRoute()
+	httpRouter := route.InitRoute()
 	api.BaseRegister(httpRouter)
 
 	routerGroup := httpRouter.Group("/api", middleware.AuthorizeJWT())
